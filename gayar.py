@@ -5,7 +5,7 @@ import random
 pygame.init()
 
 # إعدادات الشاشة
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 900, 700  # تكبير حجم الشاشة
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("El Gayar")
 
@@ -15,26 +15,26 @@ BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-# تحميل الصورة
-image = pygame.image.load("Gayar.jpg")  # استبدل بالصورة الخاصة بك
-image = pygame.transform.scale(image, (60, 40))
+# تحميل الصورة بجودة أفضل
+image = pygame.image.load("Gayar.jpg").convert_alpha()
+image = pygame.transform.smoothscale(image, (80, 50))  # تصغيرها بدقة أفضل
 
 # تحميل الصوت
 pygame.mixer.init()
 hit_sound = pygame.mixer.Sound("hit.wav")  # صوت عند ضرب الطوب
 
 # إعدادات اللاعب (اللوح)
-paddle_width = 100
+paddle_width = 120
 paddle_height = 10
 paddle_y = HEIGHT - 30
 
 # إعدادات الكرة
-ball_radius = 8
+ball_radius = 10
 
 # إعداد الطوب
-rows, cols = 5, 10
+rows, cols = 7, 10  # زيادة عدد الصفوف من 5 إلى 7
 brick_width = WIDTH // cols - 5
-brick_height = 40
+brick_height = 50  # زيادة ارتفاع الطوب ليكون أوضح
 
 # قائمة الهدايا وتأثيراتها
 bonuses = []
@@ -54,7 +54,7 @@ def reset_game():
     game_won = False   # إعادة تعيين حالة الفوز
 
     # إعادة تعيين اللوح
-    paddle_width = 100
+    paddle_width = 120
     paddle = pygame.Rect(WIDTH // 2 - paddle_width // 2, paddle_y, paddle_width, paddle_height)
 
     # إعادة تعيين الكرات
@@ -171,7 +171,7 @@ while running:
 
             bonuses.remove(bonus)
 
-    # رسم الطوب
+    # رسم الطوب بجودة أفضل
     for brick in bricks:
         screen.blit(image, (brick.x, brick.y))
 
